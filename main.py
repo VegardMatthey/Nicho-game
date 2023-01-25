@@ -266,36 +266,30 @@ def update():
       enemy_bullets[i].y = axenemies[choose_enemy_bullet[i]-1].y
       choose_enemy_bullet[i] = 0
 
+  def noe_boss():
+    boss_bullets[i].x = enemyboss.x
+    boss_bullets[i].y = enemyboss.y
+    boss_bullets[i].angle = (random.randint(-130, -50))
+    random_boss_bullets[i] = (random.randint(800,1100))
+
   for i in range(3):
     if boss_wave:
       boss_bullets[i].move_forward(4)
       if boss_bullets[i].y >= random_boss_bullets[i] or boss_bullets[i].x > 700 or boss_bullets[i].x < -100:
-        boss_bullets[i].x = enemyboss.x
-        boss_bullets[i].y = enemyboss.y
-        boss_bullets[i].angle = (random.randint(-130, -50))
-        random_boss_bullets[i] = (random.randint(800,1100))
+        noe_boss()
 
   for i in range(3):
     if ship.collidelist([boss_bullets[i]]) != -1:
-      boss_bullets[i].x = enemyboss.x
-      boss_bullets[i].y = enemyboss.y
-      boss_bullets[i].angle = (random.randint(-130, -50))
-      random_boss_bullets[i] = (random.randint(800,1100))
+      noe_boss()
       hp -= 1
 
   for i in range(3):
     if boss_bullets[i].collidelist([shields[0]]) != -1:
       shield_HP[0] -= 1
-      boss_bullets[i].x = enemyboss.x
-      boss_bullets[i].y = enemyboss.y
-      boss_bullets[i].angle = (random.randint(-130, -50))
-      random_boss_bullets[i] = (random.randint(800,1100))
+      noe_boss()
     elif boss_bullets[i].collidelist([shields[1]]) != -1:
       shield_HP[1] -= 1
-      boss_bullets[i].x = enemyboss.x
-      boss_bullets[i].y = enemyboss.y
-      boss_bullets[i].angle = (random.randint(-130, -50))
-      random_boss_bullets[i] = (random.randint(800,1100))
+      noe_boss()
    
   for i in range(5): #bullet collide
     if ship.collidelist([enemy_bullets[i]]) != -1 and hp > 0:
