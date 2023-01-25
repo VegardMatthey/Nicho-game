@@ -243,11 +243,13 @@ def update():
       playerbullets.remove(playerbullet)
       shield_HP[1] -= 1
     
+  def noe_bullets(i):
+    enemy_bullets[i].x = axenemies[choose_enemy_bullet[i]-1].x
+    enemy_bullets[i].y = axenemies[choose_enemy_bullet[i]-1].y
+    choose_enemy_bullet[i] = 0
   for i in range(5):
     if choose_enemy_bullet[i] > 0:
-      enemy_bullets[i].x = axenemies[choose_enemy_bullet[i]-1].x
-      enemy_bullets[i].y = axenemies[choose_enemy_bullet[i]-1].y
-      choose_enemy_bullet[i] = 0
+      noe_bullets(i)
 
     enemy_bullets[i].y = enemy_bullets[i].y + 5
 
@@ -257,14 +259,10 @@ def update():
 
     if enemy_bullets[i].collidelist([shields[0]]) != -1: #shields
       shield_HP[0] -= 1
-      enemy_bullets[i].x = axenemies[choose_enemy_bullet[i]-1].x
-      enemy_bullets[i].y = axenemies[choose_enemy_bullet[i]-1].y
-      choose_enemy_bullet[0] = 0
+      noe_bullets(i)
     elif enemy_bullets[i].collidelist([shields[1]]) != -1:
       shield_HP[1] -= 1
-      enemy_bullets[i].x = axenemies[choose_enemy_bullet[i]-1].x
-      enemy_bullets[i].y = axenemies[choose_enemy_bullet[i]-1].y
-      choose_enemy_bullet[i] = 0
+      noe_bullets(i)
 
   def noe_boss():
     boss_bullets[i].x = enemyboss.x
